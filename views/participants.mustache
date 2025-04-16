@@ -1,0 +1,15 @@
+{{> partials/header}}
+
+<h2>Participants</h2>
+
+{{#users}}
+  <p>👤 {{username}}</p>
+{{/users}}
+
+{{^users}}
+  <p>No one is enrolled in this course yet.</p>
+{{/users}}
+
+<a href="/courses">← Back to Courses</a>
+
+{{> partials/footer}}

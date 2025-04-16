@@ -1,0 +1,38 @@
+{{> partials/header}}
+
+<h2>Available Courses</h2>
+
+{{#courses}}
+  <div style="margin-bottom: 30px; padding: 10px; border-bottom: 1px solid #ccc;">
+    <h3>{{name}} – £{{price}}</h3>
+    <p>{{description}}</p>
+    <p><strong>Duration:</strong> {{duration}}</p>
+
+    {{#classes.length}}
+    <h4>Class Schedule:</h4>
+    <ul>
+      {{#classes}}
+      <li>{{date}} at {{time}} – {{location}}</li>
+      {{/classes}}
+    </ul>
+    {{/classes.length}}
+
+    {{^isOrganiser}}
+    <a href="/enrol/{{_id}}">Enroll</a>
+    {{/isOrganiser}}
+
+    {{#isOrganiser}}
+    <a href="/courses/{{_id}}/participants">View Participants</a> |
+    <a href="/courses/edit/{{_id}}">Edit</a> |
+    <a href="/courses/delete/{{_id}}" onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
+    {{/isOrganiser}}
+  </div>
+{{/courses}}
+
+{{^courses}}
+  <p>No courses available right now. Please check back later!</p>
+{{/courses}}
+
+<a href="/">Back to Home</a>
+
+{{> partials/footer}}

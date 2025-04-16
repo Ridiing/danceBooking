@@ -1,0 +1,37 @@
+{{> partials/header}}
+
+<h2>Add New Course</h2>
+<form method="POST" action="/courses/add">
+  <input type="text" name="name" placeholder="Course name" required><br>
+  <textarea name="description" placeholder="Description" required></textarea><br>
+  <input type="text" name="duration" placeholder="Duration (e.g. 6 weeks)" required><br>
+  <input type="number" name="price" placeholder="Price" required><br>
+
+  <h4>Class Sessions:</h4>
+  <div id="classContainer">
+    <div class="classBlock">
+      <input type="date" name="dates" required>
+      <input type="time" name="times" required>
+      <input type="text" name="locations" placeholder="Location" required><br>
+    </div>
+  </div>
+
+  <button type="button" onclick="addClassBlock()">+ Add Another Class</button><br><br>
+  <button type="submit">Add Course</button>
+</form>
+
+<script>
+  function addClassBlock() {
+    const container = document.getElementById('classContainer');
+    const block = document.createElement('div');
+    block.classList.add('classBlock');
+    block.innerHTML = `
+      <input type="date" name="dates" required>
+      <input type="time" name="times" required>
+      <input type="text" name="locations" placeholder="Location" required><br>
+    `;
+    container.appendChild(block);
+  }
+</script>
+
+{{> partials/footer}}

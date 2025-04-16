@@ -1,0 +1,14 @@
+{{> partials/header}}
+
+<h2>My Enrolled Courses</h2>
+
+{{#courses}}
+  <div>
+    <h3>{{name}}</h3>
+    <p>{{description}}</p>
+  </div>
+{{/courses}}
+
+<a href="/dashboard">Back to Dashboard</a>
+
+{{> partials/footer}}

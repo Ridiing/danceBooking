@@ -1,0 +1,20 @@
+{{> partials/header}}
+
+<h2>Welcome, {{user.username}}!</h2>
+
+{{#isOrganiser}}
+  <p>You are logged in as an organiser.</p>
+  <a href="/courses/add">Add New Course</a> |
+  <a href="/courses">View All Courses</a> |
+  <a href="/logout">Logout</a>
+{{/isOrganiser}}
+
+{{^isOrganiser}}
+  <p>You are logged in as a regular user.</p>
+  <a href="/courses">View Available Courses</a> |
+  <a href="/my-courses">My Courses</a> |
+  <a href="/logout">Logout</a>
+{{/isOrganiser}}
+
+{{> partials/footer}}
+

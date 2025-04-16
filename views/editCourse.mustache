@@ -1,0 +1,39 @@
+{{> partials/header}}
+
+<h2>Edit Course</h2>
+<form method="POST" action="/courses/edit/{{course._id}}">
+  <input type="text" name="name" value="{{course.name}}" required><br>
+  <textarea name="description" required>{{course.description}}</textarea><br>
+  <input type="text" name="duration" value="{{course.duration}}" required><br>
+  <input type="number" name="price" value="{{course.price}}" required><br>
+
+  <h4>Edit Class Sessions:</h4>
+  <div id="classContainer">
+    {{#course.classes}}
+      <div class="classBlock">
+        <input type="date" name="dates" value="{{date}}" required>
+        <input type="time" name="times" value="{{time}}" required>
+        <input type="text" name="locations" value="{{location}}" required><br>
+      </div>
+    {{/course.classes}}
+  </div>
+
+  <button type="button" onclick="addClassBlock()">+ Add Class</button><br><br>
+  <button type="submit">Save Changes</button>
+</form>
+
+<script>
+  function addClassBlock() {
+    const container = document.getElementById('classContainer');
+    const block = document.createElement('div');
+    block.classList.add('classBlock');
+    block.innerHTML = `
+      <input type="date" name="dates" required>
+      <input type="time" name="times" required>
+      <input type="text" name="locations" placeholder="Location" required><br>
+    `;
+    container.appendChild(block);
+  }
+</script>
+
+{{> partials/footer}}
