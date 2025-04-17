@@ -42,7 +42,7 @@ router.get('/courses/delete/:id', isOrganiser, courseController.deleteCourse);
 
 // Booking routes (logged-in users)
 router.post('/my-courses/unenrol/:courseId', isLoggedIn, bookingController.unenrolFromMyClass);
-router.post('courses/:id/enrol', isLoggedIn, bookingController.enrol); 
+router.post('/courses/:id/enrol', isLoggedIn, bookingController.enrol); 
 
 
 
