@@ -1,4 +1,4 @@
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const userDB = require('../models/userModel');
 
 exports.showRegister = (req, res) => {
