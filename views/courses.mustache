@@ -19,10 +19,8 @@
 
         <div class="course-actions">
           <a href="/courses/{{_id}}/participants" class="btn btn-secondary">View Participants</a>
-          <a href="/edit-course/{{_id}}" class="btn">Edit</a>
-          <form method="POST" action="/delete-course/{{_id}}" style="display:inline;">
-            <button type="submit" class="btn btn-danger">Delete</button>
-          </form>
+          <a href="/courses/edit/{{_id}}" class="btn">Edit</a>
+          <a href="/courses/delete/{{_id}}" class="btn btn-danger">Delete</a>
         </div>
       </div>
     {{/courses}}
