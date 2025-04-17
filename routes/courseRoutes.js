@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const courseController = require('../controllers/courseController');
+const bookingController = require('../controllers/bookingController'); 
 const courseDB = require('../models/courseModel');
-const bookingController = require('../controllers/bookingController');
+
 
 
 router.get('/explore-courses', (req, res) => {
