@@ -1,6 +1,6 @@
 const courseDB = require('../models/courseModel');
 const bookingDB = require('../models/bookingModel');
-const userDB = require('../models/userModel');
+const userDB = require('../models/userDB');
 
 exports.listCourses = (req, res) => {
   courseDB.find({}, (err, courses) => {
