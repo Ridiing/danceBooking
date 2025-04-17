@@ -1,21 +1,35 @@
 const bookingDB = require('../models/bookingModel');
 const courseDB  = require('../models/courseModel');
 
+// bookingController.js
 exports.enrol = (req, res) => {
   if (!req.session.user) return res.redirect('/login');
-  const userId   = req.session.user._id;
+
+  const userId = req.session.user._id;
   const courseId = req.params.id;
 
-  console.log('Enrolling', userId, 'into', courseId);
   bookingDB.findOne({ userId, courseId }, (err, existing) => {
-    if (err) return res.send('Error checking enrolment');
-    if (existing) return res.send('Already enrolled');
+    if (err) return res.send('Error checking enrollment.');
+
+    if (existing) {
+      // Load courses again and pass error
+      courseDB.find({}, (err, courses) => {
+        return res.render('exploreCourses', {
+          courses,
+          user: req.session.user,
+          error: 'You are already enrolled in this course.'
+        });
+      });
+      return;
+    }
+
     bookingDB.insert({ userId, courseId }, (err) => {
-      if (err) return res.send('Error enrolling');
+      if (err) return res.send('Error enrolling.');
       res.redirect('/my-courses');
     });
   });
 };
+
 
 exports.showMyCourses = (req, res) => {
   if (!req.session.user) return res.redirect('/login');

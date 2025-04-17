@@ -1,7 +1,9 @@
-{{> partials/header}}
-
 <div class="form-card">
   <h2>Explore Courses</h2>
+
+  {{#error}}
+    <p class="error">{{error}}</p>
+  {{/error}}
 
   <div class="course-list">
     {{#courses}}
@@ -22,12 +24,9 @@
             <button type="submit" class="btn">Enroll</button>
           </form>
         {{/user}}
-
       </div>
     {{/courses}}
   </div>
 
   <a href="/" class="back-button">Back to Home</a>
 </div>
-
-{{> partials/footer}}
