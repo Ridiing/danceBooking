@@ -1,11 +1,18 @@
-const express = require('express');
-const router = express.Router();
+const express           = require('express');
+const router            = express.Router();
 const bookingController = require('../controllers/bookingController');
 
-// View user's own courses
-router.get('/my-courses', bookingController.showMyCourses);
+function isLoggedIn(req, res, next) {
+  if (req.session.user) return next();
+  res.redirect('/login');
+}
 
-// Unenroll from a course (for logged-in user)
-router.post('/my-courses/unenrol/:courseId', bookingController.unenrolFromMyClass);
+// view your courses
+router.get('/my-courses', isLoggedIn, bookingController.showMyCourses);
+
+// unenrol
+router.post('/my-courses/unenrol/:courseId',
+            isLoggedIn,
+            bookingController.unenrol);
 
 module.exports = router;
