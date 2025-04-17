@@ -1,3 +1,4 @@
+// courseController.js
 const courseDB = require('../models/courseModel');
 const bookingDB = require('../models/bookingModel');
 const userDB = require('../models/userDB');
@@ -44,22 +45,6 @@ exports.addCourse = (req, res) => {
   courseDB.insert(newCourse, (err) => {
     if (err) return res.send('Error adding course');
     res.redirect('/courses');
-  });
-};
-
-exports.viewParticipants = (req, res) => {
-  const courseId = req.params.id;
-
-  bookingDB.find({ courseId }, (err, bookings) => {
-    if (err) return res.send('Error loading bookings');
-
-    const userIds = bookings.map(b => b.userId);
-
-    userDB.find({ _id: { $in: userIds } }, (err, users) => {
-      if (err) return res.send('Error loading users');
-
-      res.render('participants', { users, user: req.session.user });
-    });
   });
 };
 
@@ -118,7 +103,7 @@ exports.viewParticipants = (req, res) => {
       if (err) return res.send('Error loading users');
 
       res.render('participants', {
-        users,
+        participants: users, // Fixed variable name
         user: req.session.user,
         courseId
       });
@@ -134,5 +119,3 @@ exports.unenrolUser = (req, res) => {
     res.redirect(`/courses/${courseId}/participants`);
   });
 };
-
-

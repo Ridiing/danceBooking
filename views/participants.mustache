@@ -1,10 +1,14 @@
-<ul>
+<h2>Participants for This Course</h2>
+
+<ul class="participant-list">
   {{#participants}}
-    <li>{{username}} 
-      <form method="POST" action="/remove-participant/{{_id}}" style="display:inline;">
-        <button type="submit">Remove</button>
+    <li>
+      {{username}}
+      <form method="POST" action="/courses/{{../courseId}}/unenrol/{{_id}}" style="display:inline;">
+        <button type="submit" class="danger">Remove</button>
       </form>
     </li>
   {{/participants}}
 </ul>
 
+<a class="back-button" href="/dashboard">Back to Dashboard</a>
