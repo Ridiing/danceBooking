@@ -29,7 +29,11 @@ exports.showMyCourses = (req, res) => {
     const courseIds = bookings.map(b => b.courseId);
 
     courseDB.find({ _id: { $in: courseIds } }, (err, courses) => {
-      res.render('myCourses', { courses });
+      res.render('myCourses', {
+        courses,
+        user: req.session.user 
+      });
     });
   });
 };
+
