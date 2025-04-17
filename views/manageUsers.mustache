@@ -1,3 +1,5 @@
+{{> partials/header}}
+
 <div class="form-card">
   <h2>Manage Users</h2>
 
@@ -22,7 +24,7 @@
           </td>
           <td>
             <form method="POST" action="/delete-user/{{_id}}" style="display:inline;">
-              <button type="submit" class="danger">Delete</button>
+              <button type="submit" class="btn-danger">Delete</button>
             </form>
           </td>
         </tr>
@@ -33,6 +35,7 @@
   <a class="btn" href="/dashboard">Back to Dashboard</a>
 </div>
 
+{{> partials/footer}}
 
 
 

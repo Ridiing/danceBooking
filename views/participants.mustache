@@ -1,3 +1,5 @@
+{{> partials/header}}
+
 <div class="form-card">
   <h2>Participants for This Course</h2>
 
@@ -14,7 +16,7 @@
           <td>{{username}}</td>
           <td>
             <form method="POST" action="/remove-participant/{{_id}}/{{courseId}}" style="display:inline;">
-              <button type="submit" class="danger">Remove</button>
+              <button type="submit" class="btn-danger">Remove</button>
             </form>
           </td>
         </tr>
@@ -25,3 +27,4 @@
   <a class="btn" href="/dashboard">Back to Dashboard</a>
 </div>
 
+{{> partials/footer}}
