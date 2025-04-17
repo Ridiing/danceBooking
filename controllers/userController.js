@@ -1,8 +1,17 @@
 const userDB = require('../models/userDB');
 
+function findUsers(query) {
+  return new Promise((resolve, reject) => {
+    userDB.find(query, (err, docs) => {
+      if (err) return reject(err);
+      resolve(docs);
+    });
+  });
+}
+
 exports.manageUsers = async (req, res) => {
   try {
-    const users = await userDB.find({}); 
+    const users = await findUsers({});
     console.log('All users in DB:', users);
 
     const nonCurrentUsers = users.filter(
@@ -20,32 +29,3 @@ exports.manageUsers = async (req, res) => {
     res.status(500).send('Error fetching users');
   }
 };
-
-  
-  
-
-// Promote a user to organiser
-exports.makeOrganiser = async (req, res) => {
-    try {
-      const userId = req.params.id;
-      await userDB.update({ _id: userId }, { $set: { role: 'organiser' } });
-      res.redirect('/manage-users');
-    } catch (err) {
-      console.error("Error promoting user:", err);
-      res.status(500).send("Failed to promote user.");
-    }
-  };
-  
-
-// Delete a user
-exports.deleteUser = async (req, res) => {
-    try {
-      const userId = req.params.id;
-      await userDB.remove({ _id: userId });
-      res.redirect('/manage-users');
-    } catch (err) {
-      console.error("Error deleting user:", err);
-      res.status(500).send("Failed to delete user.");
-    }
-  };
-  
