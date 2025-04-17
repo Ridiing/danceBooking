@@ -4,42 +4,33 @@
   <h2>Manage Users</h2>
 
   {{#users.length}}
-    <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
-      <thead>
-        <tr>
-          <th style="text-align: left; padding: 8px;">Username</th>
-          <th style="text-align: left; padding: 8px;">Role</th>
-          <th style="text-align: left; padding: 8px;">Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#users}}
-        <tr>
-          <td style="padding: 8px;">{{username}}</td>
-          <td style="padding: 8px;">{{role}}</td>
-          <td style="padding: 8px;">
-            {{^isOrganiser}}
-              <form action="/make-organiser/{{_id}}" method="POST" style="display:inline;">
-                <button type="submit" class="btn">Make Organiser</button>
-              </form>
-            {{/isOrganiser}}
-            <form action="/delete-user/{{_id}}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
-              <button type="submit" class="btn logout">Delete</button>
+    <ul>
+      {{#users}}
+        <li>
+          {{username}} - {{#isOrganiser}}Organiser{{/isOrganiser}}{{^isOrganiser}}User{{/isOrganiser}}
+
+          {{^isOrganiser}}
+            <form action="/make-organiser/{{_id}}" method="POST" style="display:inline;">
+              <button type="submit">Make Organiser</button>
             </form>
-          </td>
-        </tr>
-        {{/users}}
-      </tbody>
-    </table>
+          {{/isOrganiser}}
+
+          <form action="/delete-user/{{_id}}" method="POST" style="display:inline;">
+            <button type="submit">Delete</button>
+          </form>
+        </li>
+      {{/users}}
+    </ul>
   {{/users.length}}
 
   {{^users.length}}
     <p>No users found.</p>
   {{/users.length}}
 
-  <a href="/dashboard" class="btn" style="margin-top: 30px;">Back to Dashboard</a>
+  <a href="/dashboard" class="btn">Back to Dashboard</a>
 </div>
 
 {{> partials/footer}}
+
 
 
