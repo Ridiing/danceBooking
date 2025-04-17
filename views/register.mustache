@@ -1,14 +1,22 @@
 {{> partials/header}}
 
-<h2>Register</h2>
-<form method="POST" action="/register">
-  <input type="text" name="username" placeholder="Username" required><br>
-  <input type="password" name="password" placeholder="Password" required><br>
-  <select name="role">
-    <option value="user">User</option>
-    <option value="organiser">Organiser</option>
-  </select><br>
-  <button type="submit">Register</button>
-</form>
+<div class="form-card">
+  <h2>Register</h2>
+  <form action="/register" method="POST">
+    <input type="text" name="username" placeholder="Choose a Username" required>
+    <input type="password" name="password" placeholder="Create a Password" required>
+
+    <label for="role">Select Role:</label>
+    <select name="role" required>
+      <option value="user">User</option>
+      <option value="organiser">Organiser</option>
+    </select>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <p>Already have an account? <a href="/login">Login here</a></p>
+</div>
 
 {{> partials/footer}}
+
