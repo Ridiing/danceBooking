@@ -36,3 +36,16 @@ exports.showMyCourses = (req, res) => {
     });
   });
 };
+
+exports.unenrolSelf = (req, res) => {
+  if (!req.session.user) return res.redirect('/login');
+
+  const userId = req.session.user._id;
+  const courseId = req.params.id;
+
+  bookingDB.remove({ userId, courseId }, {}, (err, numRemoved) => {
+    if (err) return res.send('Error unenrolling');
+    res.redirect('/my-courses');
+  });
+};
+
