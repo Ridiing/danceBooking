@@ -128,3 +128,18 @@ a.btn:hover {
 .dashboard-links .logout:hover {
   background-color: #c82333;
 }
+.homepage-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.homepage {
+  max-width: 600px;
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
