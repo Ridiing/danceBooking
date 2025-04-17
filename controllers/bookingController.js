@@ -37,7 +37,7 @@ exports.showMyCourses = (req, res) => {
   });
 };
 
-exports.unenrolFromMyClass = (req, res) => {
+exports.unenrol = (req, res) => {
   const userId = req.session.user._id;
   const courseId = req.params.courseId;
 
