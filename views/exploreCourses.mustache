@@ -17,11 +17,12 @@
           {{/classes}}
         </ul>
 
-        {{^isOrganiser}}
-          <form method="POST" action="/courses/{{_id}}/enrol">
+        {{#user}}
+          <form method="POST" action="/enrol/{{_id}}">
             <button type="submit" class="btn">Enroll</button>
           </form>
-        {{/isOrganiser}}
+        {{/user}}
+
       </div>
     {{/courses}}
   </div>
@@ -30,4 +31,3 @@
 </div>
 
 {{> partials/footer}}
-
