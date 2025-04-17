@@ -191,3 +191,20 @@ textarea {
   margin-bottom: 15px;
   font-weight: bold;
 }
+/* Centered info page card */
+.info-page {
+  max-width: 600px;
+  margin: 60px auto;
+  text-align: center;
+}
+
+.info-page p {
+  text-align: left;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+
+.info-page .actions {
+  margin-top: 2rem;
+}
