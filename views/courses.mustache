@@ -29,7 +29,7 @@
         <!-- If logged in and NOT organiser, show Enroll button -->
         {{#user}}
           {{^isOrganiser}}
-            <form method="POST" action="/courses/{{_id}}/enrol">
+            <form method="POST" action="/enrol/{{_id}}">
               <button type="submit" class="btn">Enroll</button>
             </form>
           {{/isOrganiser}}

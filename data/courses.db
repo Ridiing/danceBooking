@@ -1,2 +1,3 @@
 {"name":"Break Dancing","description":"fast paced","duration":"3 weeks","price":10,"classes":[{"date":"2025-04-24","time":"07:50","location":"hall"}],"_id":"TNUZmzlxJQ5kkMtW"}
 {"name":"Break Dancig","description":"faster","duration":"3 weeks","price":15,"classes":[{"date":"2025-04-17","time":"13:55","location":"hall"}],"_id":"aFeKqnSsHGiEHjc5"}
+{"name":"slow dance","description":"sllow","duration":"5 weeks","price":4,"classes":[{"date":"2025-04-26","time":"12:00","location":"Glasgow"}],"_id":"qqkxQJiAqvU7fMTl"}
