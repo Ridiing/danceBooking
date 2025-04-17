@@ -9,6 +9,6 @@ router.post('/enrol/:id', bookingController.enrol);
 router.get('/my-courses', bookingController.showMyCourses);
 
 // Unenroll from a course (for logged-in user)
-router.post('/unenrol/:courseId', bookingController.unenrolSelf);
+router.post('/my-courses/unenrol/:courseId', bookingController.unenrol);
 
 module.exports = router;
