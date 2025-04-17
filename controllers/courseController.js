@@ -54,7 +54,7 @@ exports.updateCourse = (req, res) => {
 
 exports.deleteCourse = (req, res) => {
   courseDB.remove({ _id: req.params.id }, {}, (err) => {
-    if (err) return res.send('Error deleting course');
+    if (err) return res.send('Error deleting');
     res.redirect('/courses');
   });
 };
