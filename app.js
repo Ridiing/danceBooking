@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'supersecretkey', // for dev only
   resave: false,
-  saveUninitialized: true
+  saveUninitialized: false
 }));
 
 // Routes (put these AFTER app is declared!)
