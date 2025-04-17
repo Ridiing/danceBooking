@@ -10,17 +10,8 @@
           <h3>{{name}}</h3>
           <p>{{description}}</p>
 
-          {{#classes.length}}
-            <p><strong>Schedule:</strong></p>
-            <ul>
-              {{#classes}}
-                <li>{{date}} at {{time}} – {{location}}</li>
-              {{/classes}}
-            </ul>
-          {{/classes.length}}
-
-          <form method="POST" action="/courses/{{_id}}/unenrol/{{userId}}" style="margin-top: 10px;">
-            <button type="submit" class="btn btn-danger">Unenroll</button>
+          <form method="POST" action="/courses/{{_id}}/unenrol/{{user._id}}" style="margin-top: 10px;">
+            <button type="submit" class="btn btn-danger">Unenrol</button>
           </form>
         </div>
       {{/courses}}
@@ -28,11 +19,10 @@
   {{/courses.length}}
 
   {{^courses.length}}
-    <p>You haven't enrolled in any courses yet.</p>
-    <a class="btn" href="/explore-courses">Browse Courses</a>
+    <p>You are not enrolled in any courses yet.</p>
   {{/courses.length}}
 
-  <a class="back-button" href="/dashboard">Back to Dashboard</a>
+  <a class="btn back-button" href="/dashboard">Back to Dashboard</a>
 </div>
 
 {{> partials/footer}}
