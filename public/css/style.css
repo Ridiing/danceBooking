@@ -161,3 +161,24 @@ textarea {
 .back-button:hover {
   text-decoration: underline;
 }
+
+.course-card h3 {
+  margin-top: 0;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+.course-card p {
+  margin: 6px 0;
+}
+
+.course-actions {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.course-actions form {
+  display: inline;
+}

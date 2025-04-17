@@ -1,38 +1,35 @@
 {{> partials/header}}
 
-<h2>Available Courses</h2>
+<div class="form-card">
+  <h2>Available Courses</h2>
 
-{{#courses}}
-  <div style="margin-bottom: 30px; padding: 10px; border-bottom: 1px solid #ccc;">
-    <h3>{{name}} – £{{price}}</h3>
-    <p>{{description}}</p>
-    <p><strong>Duration:</strong> {{duration}}</p>
+  <div class="course-list">
+    {{#courses}}
+      <div class="course-card">
+        <h3>{{name}} – £{{price}}</h3>
+        <p>{{description}}</p>
+        <p><strong>Duration:</strong> {{duration}}</p>
 
-    {{#classes.length}}
-    <h4>Class Schedule:</h4>
-    <ul>
-      {{#classes}}
-      <li>{{date}} at {{time}} – {{location}}</li>
-      {{/classes}}
-    </ul>
-    {{/classes.length}}
+        <p><strong>Class Schedule:</strong></p>
+        <ul>
+          {{#classes}}
+            <li>{{date}} at {{time}} – {{location}}</li>
+          {{/classes}}
+        </ul>
 
-    {{^isOrganiser}}
-    <a href="/enrol/{{_id}}">Enroll</a>
-    {{/isOrganiser}}
-
-    {{#isOrganiser}}
-    <a href="/courses/{{_id}}/participants">View Participants</a> |
-    <a href="/courses/edit/{{_id}}">Edit</a> |
-    <a href="/courses/delete/{{_id}}" onclick="return confirm('Are you sure you want to delete this course?')">Delete</a>
-    {{/isOrganiser}}
+        <div class="course-actions">
+          <a href="/courses/{{_id}}/participants" class="btn btn-secondary">View Participants</a>
+          <a href="/edit-course/{{_id}}" class="btn">Edit</a>
+          <form method="POST" action="/delete-course/{{_id}}" style="display:inline;">
+            <button type="submit" class="btn btn-danger">Delete</button>
+          </form>
+        </div>
+      </div>
+    {{/courses}}
   </div>
-{{/courses}}
 
-{{^courses}}
-  <p>No courses available right now. Please check back later!</p>
-{{/courses}}
-
-<a href="/">Back to Home</a>
+  <a href="/" class="back-button">Back to Home</a>
+</div>
 
 {{> partials/footer}}
+
