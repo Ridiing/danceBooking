@@ -1,53 +1,40 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
-    margin: 0;
-    padding: 0 2rem;
-    color: #333;
-  }
-  
-  h1, h2, h3 {
-    color: #444;
-  }
-  
-  a {
-    color: #007bff;
-    text-decoration: none;
-    margin-right: 10px;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
-  form input, form select, form textarea {
-    padding: 8px;
-    margin-bottom: 10px;
-    width: 300px;
-    display: block;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  button {
-    padding: 10px 20px;
-    margin-top: 10px;
-    background-color: #007bff;
-    border: none;
-    color: white;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #0056b3;
-  }
-  
-  .classBlock {
-    margin-bottom: 10px;
-  }
-  
-  div {
-    margin-bottom: 20px;
-  }
-  
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  background: #f0f4f8;
+  color: #333;
+}
+
+.homepage {
+  max-width: 600px;
+  margin: 80px auto;
+  padding: 40px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.actions {
+  margin-top: 30px;
+}
+
+a.btn {
+  display: inline-block;
+  margin: 10px;
+  padding: 12px 24px;
+  background: #007bff;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: background 0.2s ease;
+}
+
+a.btn:hover {
+  background: #0056b3;
+}
