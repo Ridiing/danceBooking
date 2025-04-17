@@ -1,14 +1,20 @@
 {{> partials/header}}
 
 <div class="homepage">
-  <h1>Welcome to DanceBooking!</h1>
-  <p>Your go-to platform for discovering and booking local dance courses. 💃🕺</p>
+  <h1>{{title}}</h1>
 
-  <div class="actions">
+  {{#user}}
+    <p>Welcome back, {{user.username}}!</p>
+    <a href="/dashboard" class="btn">Go to Dashboard</a>
+    <a href="/logout" class="btn logout">Logout</a>
+  {{/user}}
+
+  {{^user}}
+    <p>Register or login to explore dance courses!</p>
     <a href="/register" class="btn">Register</a>
     <a href="/login" class="btn">Login</a>
-    <a href="/courses" class="btn">View Courses</a>
-  </div>
+    <a href="/courses" class="btn">Browse Courses</a>
+  {{/user}}
 </div>
 
 {{> partials/footer}}
