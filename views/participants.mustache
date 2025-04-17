@@ -3,28 +3,24 @@
 <div class="form-card">
   <h2>Participants for This Course</h2>
 
-  <table class="user-table">
-    <thead>
-      <tr>
-        <th>Username</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody>
+  {{#users}}
+    <ul>
       {{#users}}
-        <tr>
-          <td>{{username}}</td>
-          <td>
-            <form method="POST" action="/remove-participant/{{_id}}/{{courseId}}" style="display:inline;">
-              <button type="submit" class="btn-danger">Remove</button>
-            </form>
-          </td>
-        </tr>
+        <li>
+          {{username}}
+          <form method="POST" action="/my-courses/unenrol/{{../courseId}}" style="display:inline;">
+            <button type="submit" onclick="return confirm('Remove this user?')">Remove</button>
+          </form>
+        </li>
       {{/users}}
-    </tbody>
-  </table>
+    </ul>
+  {{/users}}
 
-  <a class="btn" href="/dashboard">Back to Dashboard</a>
+  {{^users}}
+    <p>No participants yet.</p>
+  {{/users}}
+
+  <a href="/dashboard" class="btn">Back</a>
 </div>
 
 {{> partials/footer}}

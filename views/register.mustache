@@ -10,6 +10,8 @@
     <select name="role" required>
       <option value="user">User</option>
       <option value="organiser">Organiser</option>
+      {{#error}}<p class="error">{{error}}</p>{{/error}}
+
     </select>
 
     <button type="submit">Register</button>
