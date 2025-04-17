@@ -38,5 +38,7 @@ router.post('/courses/edit/:id', isOrganiser, courseController.updateCourse);
 router.get('/courses/delete/:id', isOrganiser, courseController.deleteCourse);
 router.post('/courses/:courseId/unenrol/:userId', isLoggedIn, courseController.unenrolUser);
 router.post('/enrol/:id', isLoggedIn, require('../controllers/bookingController').enrol);
+router.post('/courses/:id/enrol', bookingController.enrol);
+
 
 module.exports = router;
