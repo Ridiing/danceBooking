@@ -3,24 +3,31 @@
 <div class="form-card">
   <h2>Participants for This Course</h2>
 
-  {{#users}}
+  {{#users.length}}
     <ul>
       {{#users}}
         <li>
           {{username}}
-          <form method="POST" action="/my-courses/unenrol/{{../courseId}}" style="display:inline;">
-            <button type="submit" onclick="return confirm('Remove this user?')">Remove</button>
+
+          <!-- organiser‑only “remove” -->
+          <form
+            method="POST"
+            action="/courses/{{courseId}}/unenrol/{{_id}}"
+            style="display:inline;"
+            onsubmit="return confirm('Remove this user from the course?')"
+          >
+            <button type="submit" class="btn btn-danger">Remove</button>
           </form>
         </li>
       {{/users}}
     </ul>
-  {{/users}}
+  {{/users.length}}
 
-  {{^users}}
+  {{^users.length}}
     <p>No participants yet.</p>
-  {{/users}}
+  {{/users.length}}
 
-  <a href="/dashboard" class="btn">Back</a>
+  <a href="/dashboard" class="btn">Back to Dashboard</a>
 </div>
 
 {{> partials/footer}}
