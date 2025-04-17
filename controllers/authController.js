@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const userDB = require('../models/userModel');
+const userDB = require('../models/userDB');
 
 exports.showRegister = (req, res) => {
   res.render('register');
@@ -15,6 +15,8 @@ exports.register = async (req, res) => {
     res.redirect('/dashboard');
   });
 };
+
+
 
 exports.showLogin = (req, res) => {
   res.render('login');
