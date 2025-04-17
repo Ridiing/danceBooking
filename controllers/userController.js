@@ -1,36 +1,48 @@
 const userDB = require('../models/userDB');
 
+// Show manage users page (organisers only)
 exports.manageUsers = (req, res) => {
   userDB.find({}, (err, users) => {
-    if (err) return res.send('Failed to load users');
-    
-    const filteredUsers = users.map(user => ({
-      ...user,
-      isNotSelf: user._id !== req.session.user._id,
-      isOrganiser: user.role === 'organiser'
-    }));
+    if (err) {
+      console.error("Error fetching users:", err);
+      return res.status(500).send("Server error");
+    }
 
-    res.render('manageUsers', {
-      users: filteredUsers,
-      user: req.session.user
-    });
+    const filteredUsers = users
+      .filter(user => user._id !== req.session.user._id)
+      .map(user => ({
+        ...user,
+        isOrganiser: user.role === 'organiser'
+      }));
+
+    res.render('manageUsers', { users: filteredUsers });
   });
 };
 
+// Promote a user to organiser
 exports.makeOrganiser = (req, res) => {
-  userDB.update({ _id: req.params.id }, { $set: { role: 'organiser' } }, {}, (err) => {
-    if (err) return res.send('Failed to promote user');
+  const userId = req.params.id;
+
+  userDB.update({ _id: userId }, { $set: { role: 'organiser' } }, {}, (err, numReplaced) => {
+    if (err) {
+      console.error("Error promoting user:", err);
+      return res.status(500).send("Failed to promote user.");
+    }
+
     res.redirect('/manage-users');
   });
 };
 
+// Delete a user
 exports.deleteUser = (req, res) => {
-  if (req.params.id === req.session.user._id) {
-    return res.send("You can't delete yourself!");
-  }
+  const userId = req.params.id;
 
-  userDB.remove({ _id: req.params.id }, {}, (err) => {
-    if (err) return res.send('Failed to delete user');
+  userDB.remove({ _id: userId }, {}, (err, numRemoved) => {
+    if (err) {
+      console.error("Error deleting user:", err);
+      return res.status(500).send("Failed to delete user.");
+    }
+
     res.redirect('/manage-users');
   });
 };
