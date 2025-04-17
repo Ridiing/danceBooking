@@ -1,25 +1,41 @@
-<h2>Manage Users</h2>
-<table class="user-table">
-  {{#users}}
-  <tr>
-    <td>{{username}}</td>
-    <td>
-      {{^isOrganiser}}
-        <form method="POST" action="/make-organiser/{{_id}}" style="display:inline;">
-          <button type="submit">Make Organiser</button>
-        </form>
-      {{/isOrganiser}}
-    </td>
-    <td>
-      <form method="POST" action="/delete-user/{{_id}}" style="display:inline;">
-        <button type="submit" class="danger">Delete</button>
-      </form>
-    </td>
-  </tr>
-  {{/users}}
-</table>
+<div class="dashboard-card">
+  <h2>Manage Users</h2>
 
-<a class="back-button" href="/dashboard">Back to Dashboard</a>
+  <table class="user-table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Make Organiser</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#users}}
+      <tr>
+        <td>{{username}}</td>
+        <td>
+          {{^isOrganiser}}
+          <form method="POST" action="/make-organiser/{{_id}}">
+            <button type="submit">Make Organiser</button>
+          </form>
+          {{/isOrganiser}}
+        </td>
+        <td>
+          <form method="POST" action="/delete-user/{{_id}}">
+            <button type="submit" class="danger">Delete</button>
+          </form>
+        </td>
+      </tr>
+      {{/users}}
+    </tbody>
+  </table>
+
+  <div style="margin-top: 20px;">
+    <a class="btn" href="/dashboard">Back to Dashboard</a>
+  </div>
+</div>
+
+
 
 
 
