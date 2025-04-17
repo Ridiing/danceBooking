@@ -3,7 +3,7 @@
 <div class="dashboard-card">
   <h2>Manage Users</h2>
 
-  {{#users.length}}
+  {{#users}}
     <ul>
       {{#users}}
         <li>
@@ -20,11 +20,11 @@
         </li>
       {{/users}}
     </ul>
-  {{/users.length}}
+  {{/users}}
 
-  {{^users.length}}
+  {{^users}}
     <p>No users found.</p>
-  {{/users.length}}
+  {{/users}}
 
   <a href="/dashboard" class="btn">Back to Dashboard</a>
 </div>
