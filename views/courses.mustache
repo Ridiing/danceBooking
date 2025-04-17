@@ -24,6 +24,12 @@
           <a href="/courses/delete/{{_id}}" class="btn btn-danger">Delete</a>
         </div>
         {{/isOrganiser}}
+
+        {{#isStudent}}
+        <form method="POST" action="/bookings/{{_id}}/enrol" style="margin-top: 10px;">
+          <button type="submit" class="btn">Enroll</button>
+        </form>
+        {{/isStudent}}
       </div>
     {{/courses}}
   </div>

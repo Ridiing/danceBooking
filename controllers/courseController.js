@@ -10,7 +10,8 @@ exports.listCourses = (req, res) => {
     res.render('courses', {
       courses,
       user: req.session.user,
-      isOrganiser: req.session.user?.role === 'organiser'
+      isOrganiser: req.session.user?.role === 'organiser',
+      isStudent: req.session.user?.role === 'student'
     });
   });
 };
