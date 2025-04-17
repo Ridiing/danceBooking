@@ -26,14 +26,13 @@ exports.showMyCourses = (req, res) => {
   const userId = req.session.user._id;
 
   bookingDB.find({ userId }, (err, bookings) => {
+    if (err || !bookings.length) return res.render('myCourses', { courses: [] });
+
     const courseIds = bookings.map(b => b.courseId);
 
     courseDB.find({ _id: { $in: courseIds } }, (err, courses) => {
-      res.render('myCourses', {
-        courses,
-        user: req.session.user 
-      });
+      if (err) return res.send('Error loading courses');
+      res.render('myCourses', { courses });
     });
   });
 };
-
