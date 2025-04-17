@@ -1,6 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
+const userController = require('../controllers/userController');
+
+function isOrganiser(req, res, next) {
+    if (req.session.user && req.session.user.role === 'organiser') {
+      next();
+    } else {
+      res.redirect('/login');
+    }
+  }
 
 router.get('/register', authController.showRegister);
 router.post('/register', authController.register);
