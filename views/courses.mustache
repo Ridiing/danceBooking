@@ -17,23 +17,21 @@
           {{/classes}}
         </ul>
 
-        <!-- If organiser, show edit/delete/view -->
+        <!-- Organiser-only actions -->
         {{#isOrganiser}}
-        <div class="course-actions">
-          <a href="/courses/{{_id}}/participants" class="btn btn-secondary">View Participants</a>
-          <a href="/courses/edit/{{_id}}" class="btn">Edit</a>
-          <a href="/courses/delete/{{_id}}" class="btn btn-danger">Delete</a>
-        </div>
+          <div class="course-actions">
+            <a href="/courses/{{_id}}/participants" class="btn btn-secondary">View Participants</a>
+            <a href="/courses/edit/{{_id}}" class="btn">Edit</a>
+            <a href="/courses/delete/{{_id}}" class="btn btn-danger">Delete</a>
+          </div>
         {{/isOrganiser}}
 
-        <!-- If logged in and NOT organiser, show Enroll button -->
-        {{#user}}
-          {{^isOrganiser}}
-            <form method="POST" action="/enrol/{{_id}}">
-              <button type="submit" class="btn">Enroll</button>
-            </form>
-          {{/isOrganiser}}
-        {{/user}}
+        <!-- Enrol button for non-organisers -->
+        {{^isOrganiser}}
+          <form method="POST" action="/enrol/{{_id}}">
+            <button type="submit" class="btn">Enroll</button>
+          </form>
+        {{/isOrganiser}}
 
       </div>
     {{/courses}}
@@ -43,3 +41,4 @@
 </div>
 
 {{> partials/footer}}
+
