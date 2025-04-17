@@ -1,7 +1,7 @@
 {{> partials/header}}
 
 <div class="form-card">
-  <h2>Available Courses</h2>
+  <h2>Explore Courses</h2>
 
   <div class="course-list">
     {{#courses}}
@@ -17,11 +17,11 @@
           {{/classes}}
         </ul>
 
-        {{#user}}
+        {{^isOrganiser}}
           <form method="POST" action="/enrol/{{_id}}">
             <button type="submit" class="btn">Enroll</button>
           </form>
-        {{/user}}
+        {{/isOrganiser}}
       </div>
     {{/courses}}
   </div>
