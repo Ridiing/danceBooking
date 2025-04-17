@@ -37,15 +37,14 @@ exports.showMyCourses = (req, res) => {
   });
 };
 
-exports.unenrol = (req, res) => {
+exports.unenrolFromMyClass = (req, res) => {
   const userId = req.session.user._id;
   const courseId = req.params.courseId;
 
-  // double-check correct match
-  bookingDB.remove({ userId: userId, courseId: courseId }, {}, (err, numRemoved) => {
-    if (err) return res.send('Error unenrolling user');
-    console.log(`Removed ${numRemoved} booking(s) for user ${userId} from course ${courseId}`);
+  bookingDB.remove({ courseId, userId }, {}, (err, numRemoved) => {
+    if (err) return res.send('Error unenrolling from course.');
     res.redirect('/my-courses');
   });
 };
+
 
