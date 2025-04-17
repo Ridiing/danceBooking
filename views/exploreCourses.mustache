@@ -1,20 +1,34 @@
-<div class="course-list">
-  {{#courses}}
-  <div class="course-card">
-    <h3>{{name}} – £{{price}}</h3>
-    <p>{{description}}</p>
-    <p><strong>Duration:</strong> {{duration}}</p>
-    <p><strong>Class Schedule:</strong></p>
-    <ul>
-      {{#schedule}}
-      <li>{{date}} at {{time}} – {{location}}</li>
-      {{/schedule}}
-    </ul>
-    <div class="actions">
-      <a href="/participants/{{_id}}">View Participants</a> |
-      <a href="/edit-course/{{_id}}">Edit</a> |
-      <a href="/delete-course/{{_id}}">Delete</a>
-    </div>
+{{> partials/header}}
+
+<div class="form-card">
+  <h2>Available Courses</h2>
+
+  <div class="course-list">
+    {{#courses}}
+      <div class="course-card">
+        <h3>{{name}} – £{{price}}</h3>
+        <p>{{description}}</p>
+        <p><strong>Duration:</strong> {{duration}}</p>
+
+        <p><strong>Class Schedule:</strong></p>
+        <ul>
+          {{#classes}}
+            <li>{{date}} at {{time}} – {{location}}</li>
+          {{/classes}}
+        </ul>
+
+        {{#isOrganiser}}
+        <div class="course-actions">
+          <a href="/courses/{{_id}}/participants" class="btn btn-secondary">View Participants</a>
+          <a href="/courses/edit/{{_id}}" class="btn">Edit</a>
+          <a href="/courses/delete/{{_id}}" class="btn btn-danger">Delete</a>
+        </div>
+        {{/isOrganiser}}
+      </div>
+    {{/courses}}
   </div>
-  {{/courses}}
+
+  <a href="/" class="back-button">Back to Home</a>
 </div>
+
+{{> partials/footer}}

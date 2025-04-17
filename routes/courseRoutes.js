@@ -7,10 +7,13 @@ router.get('/explore-courses', (req, res) => {
   courseDB.find({}, (err, courses) => {
     if (err) return res.status(500).send('Unable to load courses');
 
-    res.render('exploreCourses', { courses });
+    res.render('exploreCourses', {
+      courses,
+      user: req.session.user,
+      isOrganiser: req.session.user?.role === 'organiser'
+    });
   });
 });
-
 
 function isLoggedIn(req, res, next) {
   if (req.session.user) return next();
