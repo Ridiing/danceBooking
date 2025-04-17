@@ -1,9 +1,10 @@
-const Datastore = require('nedb');
+const Datastore = require('nedb-promises');
 const path = require('path');
 
-const db = new Datastore({
-  filename: path.join(__dirname, '../data/nedb/users.db'),
+const userDB = Datastore.create({
+  filename: path.join(__dirname, 'data', 'users.db'),
   autoload: true
 });
 
-module.exports = db;
+module.exports = userDB;
+

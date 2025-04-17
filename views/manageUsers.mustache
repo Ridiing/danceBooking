@@ -7,12 +7,11 @@
     <ul>
       {{#users}}
         <li>
-          {{username}} - {{#isOrganiser}}Organiser{{/isOrganiser}}{{^isOrganiser}}User{{/isOrganiser}}
-
+          {{username}} 
           {{^isOrganiser}}
-          <form action="/make-organiser/{{_id}}" method="POST" style="display:inline;">
-            <button type="submit">Make Organiser</button>
-          </form>
+            <form action="/make-organiser/{{_id}}" method="POST" style="display:inline;">
+              <button type="submit">Make Organiser</button>
+            </form>
           {{/isOrganiser}}
 
           <form action="/delete-user/{{_id}}" method="POST" style="display:inline;">
