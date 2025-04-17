@@ -4,23 +4,35 @@
   <h2>Manage Users</h2>
 
   {{#users.length}}
-    <ul>
-      {{#users}}
-        <li>
-          {{username}} ({{role}})
-          {{#isNotSelf}}
-            {{^isOrganiser}}
-              <form action="/make-organiser/{{_id}}" method="POST" style="display:inline;">
-                <button type="submit">Make Organiser</button>
+    <table style="width:100%; text-align:left; margin-top:20px;">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Role</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#users}}
+        <tr>
+          <td>{{username}}</td>
+          <td>{{role}}</td>
+          <td>
+            {{#isNotSelf}}
+              {{^isOrganiser}}
+                <form action="/make-organiser/{{_id}}" method="POST" style="display:inline;">
+                  <button class="btn">Make Organiser</button>
+                </form>
+              {{/isOrganiser}}
+              <form action="/delete-user/{{_id}}" method="POST" style="display:inline;">
+                <button class="btn logout" onclick="return confirm('Delete this user?')">Delete</button>
               </form>
-            {{/isOrganiser}}
-            <form action="/delete-user/{{_id}}" method="POST" style="display:inline;">
-              <button type="submit" onclick="return confirm('Delete this user?')">Delete</button>
-            </form>
-          {{/isNotSelf}}
-        </li>
-      {{/users}}
-    </ul>
+            {{/isNotSelf}}
+          </td>
+        </tr>
+        {{/users}}
+      </tbody>
+    </table>
   {{/users.length}}
 
   {{^users.length}}
@@ -31,3 +43,4 @@
 </div>
 
 {{> partials/footer}}
+

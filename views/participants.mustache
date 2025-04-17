@@ -6,7 +6,12 @@
   {{#users.length}}
     <ul>
       {{#users}}
-        <li>{{username}}</li>
+        <li style="margin-bottom: 10px;">
+          {{username}}
+          <form action="/courses/{{../courseId}}/unenrol/{{_id}}" method="POST" style="display:inline;">
+            <button type="submit" class="btn logout" onclick="return confirm('Remove this user from the course?')">Remove</button>
+          </form>
+        </li>
       {{/users}}
     </ul>
   {{/users.length}}

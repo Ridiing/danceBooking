@@ -32,5 +32,7 @@ router.get('/courses/:id/participants', isOrganiser, courseController.viewPartic
 router.get('/courses/edit/:id', isOrganiser, courseController.showEditForm);
 router.post('/courses/edit/:id', isOrganiser, courseController.updateCourse);
 router.get('/courses/delete/:id', isOrganiser, courseController.deleteCourse);
+router.post('/courses/:courseId/unenrol/:userId', isOrganiser, courseController.unenrolUser);
+
 
 module.exports = router;
