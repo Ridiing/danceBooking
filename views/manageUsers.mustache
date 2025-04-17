@@ -1,4 +1,4 @@
-<div class="dashboard-card">
+<div class="form-card">
   <h2>Manage Users</h2>
 
   <table class="user-table">
@@ -11,28 +11,26 @@
     </thead>
     <tbody>
       {{#users}}
-      <tr>
-        <td>{{username}}</td>
-        <td>
-          {{^isOrganiser}}
-          <form method="POST" action="/make-organiser/{{_id}}">
-            <button type="submit">Make Organiser</button>
-          </form>
-          {{/isOrganiser}}
-        </td>
-        <td>
-          <form method="POST" action="/delete-user/{{_id}}">
-            <button type="submit" class="danger">Delete</button>
-          </form>
-        </td>
-      </tr>
+        <tr>
+          <td>{{username}}</td>
+          <td>
+            {{^isOrganiser}}
+              <form method="POST" action="/make-organiser/{{_id}}" style="display:inline;">
+                <button type="submit">Make Organiser</button>
+              </form>
+            {{/isOrganiser}}
+          </td>
+          <td>
+            <form method="POST" action="/delete-user/{{_id}}" style="display:inline;">
+              <button type="submit" class="danger">Delete</button>
+            </form>
+          </td>
+        </tr>
       {{/users}}
     </tbody>
   </table>
 
-  <div style="margin-top: 20px;">
-    <a class="btn" href="/dashboard">Back to Dashboard</a>
-  </div>
+  <a class="btn" href="/dashboard">Back to Dashboard</a>
 </div>
 
 
