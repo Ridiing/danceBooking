@@ -1,20 +1,24 @@
 {{> partials/header}}
 
-<h2>Welcome, {{user.username}}!</h2>
+<div class="dashboard-card">
+  <h2>Welcome, {{user.username}}!</h2>
+  <p>You are logged in as a {{#isOrganiser}}<strong>organiser</strong>{{/isOrganiser}}{{^isOrganiser}}<strong>regular user</strong>{{/isOrganiser}}.</p>
 
-{{#isOrganiser}}
-  <p>You are logged in as an organiser.</p>
-  <a href="/courses/add">Add New Course</a> |
-  <a href="/courses">View All Courses</a> |
-  <a href="/logout">Logout</a>
-{{/isOrganiser}}
+  <div class="dashboard-links">
+    {{#isOrganiser}}
+      <a href="/courses/add" class="btn">Add New Course</a>
+      <a href="/courses" class="btn">Manage Courses</a>
+    {{/isOrganiser}}
 
-{{^isOrganiser}}
-  <p>You are logged in as a regular user.</p>
-  <a href="/courses">View Available Courses</a> |
-  <a href="/my-courses">My Courses</a> |
-  <a href="/logout">Logout</a>
-{{/isOrganiser}}
+    {{^isOrganiser}}
+      <a href="/courses" class="btn">View Available Courses</a>
+      <a href="/my-courses" class="btn">My Courses</a>
+    {{/isOrganiser}}
+
+    <a href="/logout" class="btn logout">Logout</a>
+  </div>
+</div>
 
 {{> partials/footer}}
+
 
