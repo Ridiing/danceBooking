@@ -17,11 +17,13 @@
           {{/classes}}
         </ul>
 
+        {{#isOrganiser}}
         <div class="course-actions">
           <a href="/courses/{{_id}}/participants" class="btn btn-secondary">View Participants</a>
           <a href="/courses/edit/{{_id}}" class="btn">Edit</a>
           <a href="/courses/delete/{{_id}}" class="btn btn-danger">Delete</a>
         </div>
+        {{/isOrganiser}}
       </div>
     {{/courses}}
   </div>
@@ -30,4 +32,3 @@
 </div>
 
 {{> partials/footer}}
-
