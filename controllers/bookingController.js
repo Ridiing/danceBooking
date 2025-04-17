@@ -5,8 +5,10 @@ const courseDB = require('../models/courseModel');
 exports.enrol = (req, res) => {
   if (!req.session.user) return res.redirect('/login');
 
-  const userId = String(req.session.user._id);
-  const courseId = String(req.params.id);
+  const userId = req.session.user._id;
+  const courseId = req.params.id; // Ensure this is coming from req.params.id
+
+  console.log(`Enrolling user: ${userId} in course: ${courseId}`); // helpful for debugging
 
   bookingDB.findOne({ userId, courseId }, (err, existing) => {
     if (err) return res.send('Error checking enrollment.');
@@ -16,7 +18,7 @@ exports.enrol = (req, res) => {
 
     bookingDB.insert({ userId, courseId }, (err, booking) => {
       if (err) return res.send('Error enrolling.');
-      console.log('Enrolled user:', userId, 'in course:', courseId);
+      console.log(`✅ Enrolled user: ${userId} in course: ${courseId}`);
       res.redirect('/my-courses');
     });
   });
