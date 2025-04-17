@@ -5,22 +5,29 @@ exports.showRegister = (req, res) => {
   res.render('register');
 };
 
-exports.register = async (req, res) => {
+exports.register = (req, res) => {
   const { username, password, role } = req.body;
 
-  userDB.findOne({ username }, async (err, existingUser) => {
+  userDB.findOne({ username }, (err, existingUser) => {
+    if (err) return res.send('Error checking for existing user');
     if (existingUser) {
-      return res.render('register', { error: 'Username already taken.' });
+      return res.render('register', { error: 'Username already exists. Please choose another.' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    userDB.insert({ username, password: hashedPassword, role }, (err, newUser) => {
-      if (err) return res.render('register', { error: 'Registration failed. Try again.' });
+    const user = {
+      username,
+      password,
+      role: role || 'student'
+    };
+
+    userDB.insert(user, (err, newUser) => {
+      if (err) return res.send('Error registering user');
       req.session.user = newUser;
       res.redirect('/dashboard');
     });
   });
 };
+
 
 
 exports.showLogin = (req, res) => {

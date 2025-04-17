@@ -5,12 +5,13 @@
   <form action="/register" method="POST">
     <input type="text" name="username" placeholder="Choose a Username" required>
     <input type="password" name="password" placeholder="Create a Password" required>
+    {{#error}}<p class="error">{{error}}</p>{{/error}}
 
     <label for="role">Select Role:</label>
     <select name="role" required>
       <option value="user">User</option>
       <option value="organiser">Organiser</option>
-      {{#error}}<p class="error">{{error}}</p>{{/error}}
+      
 
     </select>
 
