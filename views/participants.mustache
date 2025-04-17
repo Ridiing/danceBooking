@@ -1,15 +1,22 @@
 {{> partials/header}}
 
-<h2>Participants</h2>
+<div class="dashboard-card">
+  <h2>Participants for This Course</h2>
 
-{{#users}}
-  <p>👤 {{username}}</p>
-{{/users}}
+  {{#users.length}}
+    <ul>
+      {{#users}}
+        <li>{{username}}</li>
+      {{/users}}
+    </ul>
+  {{/users.length}}
 
-{{^users}}
-  <p>No one is enrolled in this course yet.</p>
-{{/users}}
+  {{^users.length}}
+    <p>No one has enrolled yet.</p>
+  {{/users.length}}
 
-<a href="/courses">← Back to Courses</a>
+  <a href="/dashboard" class="btn">Back to Dashboard</a>
+</div>
 
 {{> partials/footer}}
+

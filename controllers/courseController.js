@@ -105,3 +105,24 @@ exports.deleteCourse = (req, res) => {
     res.redirect('/courses');
   });
 };
+
+exports.viewParticipants = (req, res) => {
+  const courseId = req.params.id;
+
+  bookingDB.find({ courseId }, (err, bookings) => {
+    if (err) return res.send('Error loading bookings');
+
+    const userIds = bookings.map(b => b.userId);
+
+    userDB.find({ _id: { $in: userIds } }, (err, users) => {
+      if (err) return res.send('Error loading users');
+
+      res.render('participants', {
+        users,
+        user: req.session.user,
+        courseId
+      });
+    });
+  });
+};
+

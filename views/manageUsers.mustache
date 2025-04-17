@@ -1,0 +1,33 @@
+{{> partials/header}}
+
+<div class="dashboard-card">
+  <h2>Manage Users</h2>
+
+  {{#users.length}}
+    <ul>
+      {{#users}}
+        <li>
+          {{username}} ({{role}})
+          {{#isNotSelf}}
+            {{^isOrganiser}}
+              <form action="/make-organiser/{{_id}}" method="POST" style="display:inline;">
+                <button type="submit">Make Organiser</button>
+              </form>
+            {{/isOrganiser}}
+            <form action="/delete-user/{{_id}}" method="POST" style="display:inline;">
+              <button type="submit" onclick="return confirm('Delete this user?')">Delete</button>
+            </form>
+          {{/isNotSelf}}
+        </li>
+      {{/users}}
+    </ul>
+  {{/users.length}}
+
+  {{^users.length}}
+    <p>No users found.</p>
+  {{/users.length}}
+
+  <a href="/dashboard" class="btn">Back to Dashboard</a>
+</div>
+
+{{> partials/footer}}
