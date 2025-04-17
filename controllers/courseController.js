@@ -4,17 +4,20 @@ const userDB = require('../models/userModel');
 
 exports.listCourses = (req, res) => {
   courseDB.find({}, (err, courses) => {
-    if (err) return res.send('Error loading courses');
+    if (err) return res.status(500).send('Error loading courses');
 
     res.render('courses', {
       courses,
+      user: req.session.user,
       isOrganiser: req.session.user?.role === 'organiser'
     });
   });
 };
 
 exports.showAddForm = (req, res) => {
-  res.render('addCourse');
+  res.render('addCourse', {
+    user: req.session.user
+  });
 };
 
 exports.addCourse = (req, res) => {
@@ -55,51 +58,50 @@ exports.viewParticipants = (req, res) => {
     userDB.find({ _id: { $in: userIds } }, (err, users) => {
       if (err) return res.send('Error loading users');
 
-      res.render('participants', { users });
+      res.render('participants', { users, user: req.session.user });
     });
   });
 };
 
 exports.showEditForm = (req, res) => {
-    const courseId = req.params.id;
-  
-    courseDB.findOne({ _id: courseId }, (err, course) => {
-      if (err || !course) return res.send('Course not found');
-      res.render('editCourse', { course });
-    });
+  const courseId = req.params.id;
+
+  courseDB.findOne({ _id: courseId }, (err, course) => {
+    if (err || !course) return res.send('Course not found');
+    res.render('editCourse', { course, user: req.session.user });
+  });
+};
+
+exports.updateCourse = (req, res) => {
+  const { name, description, duration, price, dates, times, locations } = req.body;
+
+  const classes = Array.isArray(dates) ? dates.map((_, i) => ({
+    date: dates[i],
+    time: times[i],
+    location: locations[i]
+  })) : [{
+    date: dates,
+    time: times,
+    location: locations
+  }];
+
+  const updatedCourse = {
+    name,
+    description,
+    duration,
+    price: parseFloat(price),
+    classes
   };
-  
-  exports.updateCourse = (req, res) => {
-    const { name, description, duration, price, dates, times, locations } = req.body;
-  
-    const classes = Array.isArray(dates) ? dates.map((_, i) => ({
-      date: dates[i],
-      time: times[i],
-      location: locations[i]
-    })) : [{
-      date: dates,
-      time: times,
-      location: locations
-    }];
-  
-    const updatedCourse = {
-      name,
-      description,
-      duration,
-      price: parseFloat(price),
-      classes
-    };
-  
-    courseDB.update({ _id: req.params.id }, { $set: updatedCourse }, {}, (err) => {
-      if (err) return res.send('Error updating course');
-      res.redirect('/courses');
-    });
-  };
-  
-  exports.deleteCourse = (req, res) => {
-    courseDB.remove({ _id: req.params.id }, {}, (err) => {
-      if (err) return res.send('Error deleting course');
-      res.redirect('/courses');
-    });
-  };
-  
+
+  courseDB.update({ _id: req.params.id }, { $set: updatedCourse }, {}, (err) => {
+    if (err) return res.send('Error updating course');
+    res.redirect('/courses');
+  });
+};
+
+exports.deleteCourse = (req, res) => {
+  courseDB.remove({ _id: req.params.id }, {}, (err) => {
+    if (err) return res.send('Error deleting course');
+    res.redirect('/courses');
+  });
+};
