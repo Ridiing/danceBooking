@@ -17,13 +17,13 @@
           {{/classes}}
         </ul>
 
-        {{#isOrganiser}}
-        <div class="course-actions">
-          <a href="/courses/{{_id}}/participants" class="btn btn-secondary">View Participants</a>
-          <a href="/courses/edit/{{_id}}" class="btn">Edit</a>
-          <a href="/courses/delete/{{_id}}" class="btn btn-danger">Delete</a>
-        </div>
-        {{/isOrganiser}}
+        {{#user}}
+          {{^isOrganiser}}
+            <form method="POST" action="/enrol/{{_id}}">
+              <button type="submit" class="btn">Enroll</button>
+            </form>
+          {{/isOrganiser}}
+        {{/user}}
       </div>
     {{/courses}}
   </div>
@@ -32,3 +32,4 @@
 </div>
 
 {{> partials/footer}}
+
