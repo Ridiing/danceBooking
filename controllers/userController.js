@@ -1,17 +1,13 @@
+// controllers/userController.js
 const userDB = require('../models/userDB');
 
-function findUsers(query) {
-  return new Promise((resolve, reject) => {
-    userDB.find(query, (err, docs) => {
-      if (err) return reject(err);
-      resolve(docs);
-    });
-  });
-}
+exports.manageUsers = (req, res) => {
+  userDB.find({}, (err, users) => {
+    if (err) {
+      console.error('Error fetching users:', err);
+      return res.status(500).send('Error fetching users');
+    }
 
-exports.manageUsers = async (req, res) => {
-  try {
-    const users = await findUsers({});
     console.log('All users in DB:', users);
 
     const nonCurrentUsers = users.filter(
@@ -24,8 +20,28 @@ exports.manageUsers = async (req, res) => {
         isOrganiser: user.role === 'organiser'
       }))
     });
+  });
+};
+
+exports.makeOrganiser = async (req, res) => {
+  try {
+    const userId = req.params.id;
+    await userDB.update({ _id: userId }, { $set: { role: 'organiser' } });
+    res.redirect('/manage-users');
   } catch (err) {
-    console.error('Error fetching users:', err);
-    res.status(500).send('Error fetching users');
+    console.error("Error promoting user:", err);
+    res.status(500).send("Failed to promote user.");
   }
+};
+
+exports.deleteUser = (req, res) => {
+  const userId = req.params.id;
+
+  userDB.remove({ _id: userId }, {}, (err, numRemoved) => {
+    if (err) {
+      console.error('Error deleting user:', err);
+      return res.status(500).send('Failed to delete user.');
+    }
+    res.redirect('/manage-users');
+  });
 };
