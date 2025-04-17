@@ -1,20 +1,15 @@
 {{> partials/header}}
 
-<div class="homepage">
-  <h1>{{title}}</h1>
+<div class="homepage-card">
+  <h1>Welcome to the Dance Organisation</h1>
+  <p>Register or login to explore dance courses!</p>
 
-  {{#user}}
-    <p>Welcome back, {{user.username}}!</p>
-    <a href="/dashboard" class="btn">Go to Dashboard</a>
-    <a href="/logout" class="btn logout">Logout</a>
-  {{/user}}
-
-  {{^user}}
-    <p>Register or login to explore dance courses!</p>
+  <div class="btn-group">
     <a href="/register" class="btn">Register</a>
     <a href="/login" class="btn">Login</a>
-    <a href="/courses" class="btn">Browse Courses</a>
-  {{/user}}
+    <a href="/explore-courses" class="btn">Browse Courses</a>
+    <a href="/about" class="btn">About</a>
+  </div>
 </div>
 
 {{> partials/footer}}
