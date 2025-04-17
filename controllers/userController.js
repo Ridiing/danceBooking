@@ -8,12 +8,16 @@ exports.manageUsers = (req, res) => {
       return res.status(500).send("Server error");
     }
 
+    console.log("All users in DB:", users); // Debug
+
     const filteredUsers = users
       .filter(user => user._id !== req.session.user._id)
       .map(user => ({
         ...user,
         isOrganiser: user.role === 'organiser'
       }));
+
+    console.log("Filtered users:", filteredUsers); // Debug
 
     res.render('manageUsers', { users: filteredUsers });
   });
@@ -29,6 +33,7 @@ exports.makeOrganiser = (req, res) => {
       return res.status(500).send("Failed to promote user.");
     }
 
+    console.log(`User ${userId} promoted to organiser.`);
     res.redirect('/manage-users');
   });
 };
@@ -43,6 +48,7 @@ exports.deleteUser = (req, res) => {
       return res.status(500).send("Failed to delete user.");
     }
 
+    console.log(`User ${userId} deleted.`);
     res.redirect('/manage-users');
   });
 };
