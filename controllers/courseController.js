@@ -103,8 +103,9 @@ exports.viewParticipants = (req, res) => {
     userDB.find({ _id: { $in: userIds } }, (err, users) => {
       if (err) return res.send('Error loading users');
 
+    
       res.render('participants', {
-        participants: users, // Fixed variable name
+        users,
         user: req.session.user,
         courseId
       });
