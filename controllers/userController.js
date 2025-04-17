@@ -1,8 +1,5 @@
 const userDB = require('../models/userDB');
 
-// Show manage users page (organisers only)
-const userDB = require('../models/userDB');
-
 exports.manageUsers = async (req, res) => {
   try {
     const users = await userDB.find({}); 
