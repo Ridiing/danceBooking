@@ -1,6 +1,7 @@
 # Dance Class Booking Web Application
 
-This is a web-based dance class booking system that allows users to register, browse available classes, enroll, and manage their enrollments. Organisers can add courses, view participants, and manage users.
+This is a web-based dance class booking system that allows users to register, browse available classes, enroll, and manage their enrollments. Organisers can add courses, view participants, and manage users. Built with 
+Node.js, Express, Mustache and NeDB, hosted with Heroku.
 
 ## Features
 
@@ -26,18 +27,30 @@ This is a web-based dance class booking system that allows users to register, br
 You can access the live application here:  
 https://dancebookingcw-575696c3be7f.herokuapp.com
 
-Organiser - Userr / user
-User - User / User 
-(username / password)
+Organiser - Username: userr Password: user
+User - Username: user Password: user
 
 ---
+Installation & Local Setup
 
-## Technologies Used
+1. Clone the repository
 
-- **Frontend**: HTML, CSS (custom styling)
-- **Templating**: Mustache.js
-- **Backend**: Node.js, Express.js
-- **Database**: NeDB (file-based persistent database)
-- **Session Management**: express-session
-- **Hosting**: Heroku
+   git clone https://github.com/Ridiing/danceBooking.git
+   cd danceBooking
+
+2. Install dependencies
+    npm install
+
+3. Configure environment variables
+    Create a .env file in the project root:
+
+    PORT=3000
+    SESSION_SECRET=your_secret_key
+
+4. Run the application
+
+    npm start
+
+    Visit http://localhost:3000 in your browser.
+
 
