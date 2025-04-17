@@ -1,9 +1,14 @@
+{{> partials/header}}
+
 <div class="form-card">
   <h2>Explore Courses</h2>
 
   {{#error}}
-    <p class="error">{{error}}</p>
+    <p class="error">{{.}}</p>
   {{/error}}
+  {{#success}}
+    <p class="success">{{.}}</p>
+  {{/success}}
 
   <div class="course-list">
     {{#courses}}
@@ -28,5 +33,7 @@
     {{/courses}}
   </div>
 
-  <a href="/" class="back-button">Back to Home</a>
+  <a href="/" class="btn back-button">Back to Home</a>
 </div>
+
+{{> partials/footer}}
