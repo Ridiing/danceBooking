@@ -26,6 +26,10 @@ This is a web-based dance class booking system that allows users to register, br
 You can access the live application here:  
 https://dancebookingcw-575696c3be7f.herokuapp.com
 
+Organiser - Userr / user
+User - User / User 
+(username / password)
+
 ---
 
 ## Technologies Used
