@@ -7,7 +7,6 @@ exports.enrol = (req, res) => {
   const userId = req.session.user._id;
   const courseId = req.params.id;
 
-  // prevent duplicate bookings
   bookingDB.findOne({ userId, courseId }, (err, existing) => {
     if (existing) {
       return res.send('You are already enrolled in this course.');
@@ -37,7 +36,7 @@ exports.showMyCourses = (req, res) => {
   });
 };
 
-exports.unenrol = (req, res) => {
+exports.unenrolFromMyClass = (req, res) => {
   const userId = req.session.user._id;
   const courseId = req.params.courseId;
 

@@ -1,7 +1,7 @@
 {{> partials/header}}
 
 <div class="form-card">
-  <h2>My Courses</h2>
+  <h2>My Enrolled Courses</h2>
 
   {{#courses.length}}
     <div class="course-list">
@@ -18,7 +18,7 @@
             {{/classes}}
           </ul>
 
-          <form method="POST" action="/my-courses/unenrol/{{_id}}">
+          <form method="POST" action="/my-courses/unenrol/{{_id}}" style="margin-top: 10px;">
             <button type="submit" class="btn btn-danger">Unenrol</button>
           </form>
         </div>
@@ -27,10 +27,10 @@
   {{/courses.length}}
 
   {{^courses.length}}
-    <p>You are not enrolled in any courses yet.</p>
+    <p>You are not enrolled in any courses.</p>
   {{/courses.length}}
 
-  <a class="btn" href="/dashboard">Back to Dashboard</a>
+  <a href="/dashboard" class="btn">Back to Dashboard</a>
 </div>
 
 {{> partials/footer}}
