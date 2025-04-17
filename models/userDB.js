@@ -1,16 +1,9 @@
-// models/userDB.js
-const db = require('./db'); // or however you access your DB
+const Datastore = require('nedb');
+const path = require('path');
 
-module.exports = {
-  getAllUsers: async () => {
-    return db.get('users').value(); // example using lowdb or similar
-  },
+const db = new Datastore({
+  filename: path.join(__dirname, '../data/nedb/users.db'),
+  autoload: true
+});
 
-  deleteUserById: async (id) => {
-    return db.get('users').remove({ id }).write();
-  },
-
-  makeOrganiser: async (id) => {
-    return db.get('users').find({ id }).assign({ role: 'organiser' }).write();
-  }
-};
+module.exports = db;
