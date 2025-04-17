@@ -1,18 +1,15 @@
 const express = require('express');
 const router = express.Router();
 const courseController = require('../controllers/courseController');
-const bookingController = require('../controllers/bookingController'); 
+const bookingController = require('../controllers/bookingController');
 const courseDB = require('../models/courseModel');
-
-
 
 router.get('/explore-courses', (req, res) => {
   courseDB.find({}, (err, courses) => {
     if (err) return res.status(500).send('Unable to load courses');
-
     res.render('exploreCourses', {
       courses,
-      user: req.session.user, 
+      user: req.session.user,
       isOrganiser: req.session.user?.role === 'organiser'
     });
   });
@@ -25,10 +22,9 @@ function isLoggedIn(req, res, next) {
 
 function isOrganiser(req, res, next) {
   if (req.session.user && req.session.user.role === 'organiser') {
-    next();
-  } else {
-    res.redirect('/login');
+    return next();
   }
+  res.redirect('/login');
 }
 
 // Logged in user routes
@@ -40,8 +36,4 @@ router.get('/courses/edit/:id', isOrganiser, courseController.showEditForm);
 router.post('/courses/edit/:id', isOrganiser, courseController.updateCourse);
 router.get('/courses/delete/:id', isOrganiser, courseController.deleteCourse);
 router.post('/my-courses/unenrol/:courseId', isLoggedIn, bookingController.unenrolFromMyClass);
-router.post('/enrol/:id', isLoggedIn, require('../controllers/bookingController').enrol);
-router.post('/courses/:id/enrol', bookingController.enrol);
-
-
-module.exports = router;
+router.post('/courses/:id/enrol', isLoggedIn, bookingController.enrol); 
