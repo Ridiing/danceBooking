@@ -2,7 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Dance Organisation</title>
+  <title>DanceBooking</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
+  <header>
+    <nav class="navbar">
+      <a href="/">Home</a>
+      <a href="/about">About</a>
+      <a href="/explore-courses">Courses</a>
+
+      {{#user}}
+        <span>Welcome, {{user.username}}!</span>
+        <a href="/dashboard">Dashboard</a>
+        <a href="/logout" class="logout-link">Logout</a>
+      {{/user}}
+
+      {{^user}}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      {{/user}}
+    </nav>
+  </header>
+
+  <main>

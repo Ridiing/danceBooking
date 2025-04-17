@@ -1,0 +1,28 @@
+{{> partials/header}}
+
+<h2>Current & Upcoming Courses</h2>
+
+{{#courses}}
+  <div style="margin-bottom: 30px; padding: 10px; border-bottom: 1px solid #ccc;">
+    <h3>{{name}} – £{{price}}</h3>
+    <p><strong>Duration:</strong> {{duration}}</p>
+    <p><strong>Description:</strong> {{description}}</p>
+
+    {{#classes.length}}
+    <h4>Schedule:</h4>
+    <ul>
+      {{#classes}}
+      <li>{{date}} at {{time}} – {{location}}</li>
+      {{/classes}}
+    </ul>
+    {{/classes.length}}
+  </div>
+{{/courses}}
+
+{{^courses}}
+  <p>No courses are available right now. Please check back soon!</p>
+{{/courses}}
+
+<a href="/" class="btn">Back to Home</a>
+
+{{> partials/footer}}

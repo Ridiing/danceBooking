@@ -1,6 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const courseController = require('../controllers/courseController');
+const courseDB = require('../models/courseModel');
+
+router.get('/explore-courses', (req, res) => {
+  courseDB.find({}, (err, courses) => {
+    if (err) return res.status(500).send('Unable to load courses');
+
+    res.render('exploreCourses', { courses });
+  });
+});
+
 
 function isLoggedIn(req, res, next) {
   if (req.session.user) return next();
