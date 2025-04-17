@@ -14,6 +14,7 @@ exports.manageUsers = async (req, res) => {
         }));
   
       console.log("Filtered users:", filteredUsers);
+  
       res.render('manageUsers', { users: filteredUsers });
     } catch (err) {
       console.error("Error fetching users:", err);
@@ -21,33 +22,30 @@ exports.manageUsers = async (req, res) => {
     }
   };
   
+  
 
 // Promote a user to organiser
-exports.makeOrganiser = (req, res) => {
-  const userId = req.params.id;
-
-  userDB.update({ _id: userId }, { $set: { role: 'organiser' } }, {}, (err, numReplaced) => {
-    if (err) {
+exports.makeOrganiser = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      await userDB.update({ _id: userId }, { $set: { role: 'organiser' } });
+      res.redirect('/manage-users');
+    } catch (err) {
       console.error("Error promoting user:", err);
-      return res.status(500).send("Failed to promote user.");
+      res.status(500).send("Failed to promote user.");
     }
-
-    console.log(`User ${userId} promoted to organiser.`);
-    res.redirect('/manage-users');
-  });
-};
+  };
+  
 
 // Delete a user
-exports.deleteUser = (req, res) => {
-  const userId = req.params.id;
-
-  userDB.remove({ _id: userId }, {}, (err, numRemoved) => {
-    if (err) {
+exports.deleteUser = async (req, res) => {
+    try {
+      const userId = req.params.id;
+      await userDB.remove({ _id: userId });
+      res.redirect('/manage-users');
+    } catch (err) {
       console.error("Error deleting user:", err);
-      return res.status(500).send("Failed to delete user.");
+      res.status(500).send("Failed to delete user.");
     }
-
-    console.log(`User ${userId} deleted.`);
-    res.redirect('/manage-users');
-  });
-};
+  };
+  
