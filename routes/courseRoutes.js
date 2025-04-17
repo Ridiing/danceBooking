@@ -40,9 +40,11 @@ router.get('/courses/edit/:id', isOrganiser, courseController.showEditForm);
 router.post('/courses/edit/:id', isOrganiser, courseController.updateCourse);
 router.get('/courses/delete/:id', isOrganiser, courseController.deleteCourse);
 
-// Booking routes (logged-in users)
-router.post('/my-courses/unenrol/:courseId', isLoggedIn, bookingController.unenrolFromMyClass);
-router.post('/courses/:id/enrol', isLoggedIn, bookingController.enrol); 
+
+router.post('/enrol/:id', isLoggedIn, bookingController.enrol); // GOOD
+router.post('/my-courses/unenrol/:courseId', isLoggedIn, bookingController.unenrolFromMyClass); // GOOD
+
+
 
 
 
