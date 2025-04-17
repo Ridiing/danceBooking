@@ -1,27 +1,26 @@
 const userDB = require('../models/userDB');
 
 // Show manage users page (organisers only)
-exports.manageUsers = (req, res) => {
-  userDB.find({}, (err, users) => {
-    if (err) {
+exports.manageUsers = async (req, res) => {
+    try {
+      const users = await userDB.find({});
+      console.log("All users in DB:", users);
+  
+      const filteredUsers = users
+        .filter(user => user._id !== req.session.user._id)
+        .map(user => ({
+          ...user,
+          isOrganiser: user.role === 'organiser'
+        }));
+  
+      console.log("Filtered users:", filteredUsers);
+      res.render('manageUsers', { users: filteredUsers });
+    } catch (err) {
       console.error("Error fetching users:", err);
-      return res.status(500).send("Server error");
+      res.status(500).send("Server error");
     }
-
-    console.log("All users in DB:", users); // Debug
-
-    const filteredUsers = users
-      .filter(user => user._id !== req.session.user._id)
-      .map(user => ({
-        ...user,
-        isOrganiser: user.role === 'organiser'
-      }));
-
-    console.log("Filtered users:", filteredUsers); // Debug
-
-    res.render('manageUsers', { users: filteredUsers });
-  });
-};
+  };
+  
 
 // Promote a user to organiser
 exports.makeOrganiser = (req, res) => {
