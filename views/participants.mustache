@@ -1,27 +1,10 @@
-{{> partials/header}}
-
-<div class="dashboard-card">
-  <h2>Participants for This Course</h2>
-
-  {{#users.length}}
-    <ul>
-      {{#users}}
-        <li style="margin-bottom: 10px;">
-          {{username}}
-          <form action="/courses/{{../courseId}}/unenrol/{{_id}}" method="POST" style="display:inline;">
-            <button type="submit" class="btn logout" onclick="return confirm('Remove this user from the course?')">Remove</button>
-          </form>
-        </li>
-      {{/users}}
-    </ul>
-  {{/users.length}}
-
-  {{^users.length}}
-    <p>No one has enrolled yet.</p>
-  {{/users.length}}
-
-  <a href="/dashboard" class="btn">Back to Dashboard</a>
-</div>
-
-{{> partials/footer}}
+<ul>
+  {{#participants}}
+    <li>{{username}} 
+      <form method="POST" action="/remove-participant/{{_id}}" style="display:inline;">
+        <button type="submit">Remove</button>
+      </form>
+    </li>
+  {{/participants}}
+</ul>
 

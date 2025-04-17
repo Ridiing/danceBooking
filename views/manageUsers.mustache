@@ -1,35 +1,26 @@
-{{> partials/header}}
-
-<div class="dashboard-card">
-  <h2>Manage Users</h2>
-
+<h2>Manage Users</h2>
+<table class="user-table">
   {{#users}}
-    <ul>
-      {{#users}}
-        <li>
-          {{username}} 
-          {{^isOrganiser}}
-            <form action="/make-organiser/{{_id}}" method="POST" style="display:inline;">
-              <button type="submit">Make Organiser</button>
-            </form>
-          {{/isOrganiser}}
-
-          <form action="/delete-user/{{_id}}" method="POST" style="display:inline;">
-            <button type="submit">Delete</button>
-          </form>
-        </li>
-      {{/users}}
-    </ul>
+  <tr>
+    <td>{{username}}</td>
+    <td>
+      {{^isOrganiser}}
+        <form method="POST" action="/make-organiser/{{_id}}" style="display:inline;">
+          <button type="submit">Make Organiser</button>
+        </form>
+      {{/isOrganiser}}
+    </td>
+    <td>
+      <form method="POST" action="/delete-user/{{_id}}" style="display:inline;">
+        <button type="submit" class="danger">Delete</button>
+      </form>
+    </td>
+  </tr>
   {{/users}}
+</table>
 
-  {{^users}}
-    <p>No users found.</p>
-  {{/users}}
+<a class="back-button" href="/dashboard">Back to Dashboard</a>
 
-  <a href="/dashboard" class="btn">Back to Dashboard</a>
-</div>
-
-{{> partials/footer}}
 
 
 
