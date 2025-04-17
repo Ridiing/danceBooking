@@ -113,10 +113,11 @@ exports.viewParticipants = (req, res) => {
 };
 
 exports.unenrolUser = (req, res) => {
-  const { courseId, userId } = req.params;
+  const courseId = req.params.courseId;
+  const userId = req.session.user._id; 
 
   bookingDB.remove({ courseId, userId }, {}, (err, numRemoved) => {
     if (err) return res.send('Error unenrolling user');
-    res.redirect(`/courses/${courseId}/participants`);
+    res.redirect('/my-courses');
   });
 };
