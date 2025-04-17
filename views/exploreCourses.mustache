@@ -18,11 +18,11 @@
         </ul>
 
         {{#user}}
-          {{^isOrganiser}}
-            <form method="POST" action="/enrol/{{_id}}">
+          <div class="course-actions">
+            <form method="POST" action="/enrol/{{_id}}" style="display:inline;">
               <button type="submit" class="btn">Enroll</button>
             </form>
-          {{/isOrganiser}}
+          </div>
         {{/user}}
       </div>
     {{/courses}}
@@ -32,4 +32,3 @@
 </div>
 
 {{> partials/footer}}
-
