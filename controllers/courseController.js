@@ -7,6 +7,7 @@ exports.listCourses = (req, res) => {
     if (err) return res.status(500).send('Error loading courses');
     res.render('courses', {
       courses,
+      user: req.session.user,
       isOrganiser: req.session.user?.role === 'organiser'
     });
   });
